@@ -1,3 +1,15 @@
+export interface PluginListenerHandle {
+  remove: () => void;
+}
+
 export interface SmsRetrieverPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  startSmsRetriever(): Promise<{ value: string }>;
+  addListener(
+    eventName: 'otpReceived',
+    listenerFunc: (info: { otp: string }) => void
+  ): PluginListenerHandle;
+  addListener(
+    eventName: 'otpTimeout',
+    listenerFunc: () => void
+  ): PluginListenerHandle;
 }
