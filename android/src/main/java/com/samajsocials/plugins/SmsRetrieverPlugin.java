@@ -71,7 +71,7 @@ public class SmsRetrieverPlugin extends Plugin {
         };
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-             getContext().registerReceiver(smsReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+             getContext().registerReceiver(smsReceiver, intentFilter, Context.RECEIVER_EXPORTED);
          } else {
              getContext().registerReceiver(smsReceiver, intentFilter);
          }
