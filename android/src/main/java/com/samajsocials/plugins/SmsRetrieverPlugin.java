@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.getcapacitor.JSObject;
@@ -69,7 +70,11 @@ public class SmsRetrieverPlugin extends Plugin {
             }
         };
 
-        getContext().registerReceiver(smsReceiver, intentFilter);
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+             getContext().registerReceiver(smsReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+         } else {
+             getContext().registerReceiver(smsReceiver, intentFilter);
+         }
     }
 
     private String extractOtpFromMessage(String message) {
